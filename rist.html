@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>リスト</title>
 </head>
+
 <body>
-<div id="input"></div>
-<label>TODO: <input id= "todo"></label><br>
-難易度：<select>
-    <option>易</option>
-    <option>普</option>
-    <option>難</option>
-</select>
-<label>期日：<input type="date"></label>
-<button id="submit">追加</button>
+    <input id="todo-input" type="text" placeholder="やることを入力">
+        <button id="addbtn">追加</button>
+    <ul id="todo-list"></ul>
+    <script src="rist.js"></script>
 </body>
 </html>

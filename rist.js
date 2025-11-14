@@ -1,19 +1,21 @@
-const table = document.querySelector('table');
-const todo = document.getElementById('todo');
-const priority = document.querySelector('select');
-const deadline = document.querySelector('input[type="date"]');
-const submit = document.getElementById('submit');
+const input = document.getElementById("todo-input");
+const addBtn = document.getElementById("addbtn");
+const list = document.getElementById("todo-list");
 
-submit.addEventListener('click', () => {
-    const item = {};
-    item.todo = todo.value;
-    item.priority = priority.value;
-    item.deadline = deadline.value;
-    item.done = false;
+addBtn.addEventListener("click", () => {
+    const text = input.value.trim();
+    if (text === "") return;
 
-    console;log(item);
+    const li = document.createElement("li");
+    li.textContent = text;
 
-    todo.value = '';
-    priority.value = '易';
-    deadline.value = '';
+    const delbtn = document.createElement("button");
+    delbtn.textContent = "削除";
+    delbtn.addEventListener("click", () => {
+        li.remove();
+    });
+
+    li.appendChild(delbtn);
+    list.appendChild(li);
+    input.value = "";
 });
