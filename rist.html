@@ -40,9 +40,10 @@
 <body>
     <div id="tabs">
         <button id="tab-todo" class="active">ToDo</button>
-        <button id="tab-blank">Blank</button>
+        <button id="tab-blank">Training</button>
     </div>
     <div id="page-todo" class="page active">
+        <h3>ToDoリスト</h3>
         <input id="todo-input" type="text" placeholder="やることを入力">
         難易度: <select id="difficulty-select">
             <option selected>易</option>
@@ -59,7 +60,11 @@
     </div>
 
     <div id="page-blank" class="page">
-        <h1>Blank Page</h1>
+        <h3>キャラクター画面</h3>
+        <img id="character" src="1.gif">
+        <div>
+            <button id="reset-btn">リセット</button>
+        </div>
     </div>
 
     <script src="spa.js"></script>
