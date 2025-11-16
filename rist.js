@@ -30,23 +30,23 @@ addBtn.addEventListener("click", () => {
     attributeSelect.value = "生活";
 });
 
-    function saveTasks() {
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
-    function addTaskToList(task) {
-        const li = document.createElement("li");
-        li.textContent = `${task.text}（難易度：${task.difficulty}、属性：${task.attribute}）`;
+function addTaskToList(task) {
+    const li = document.createElement("li");
+    li.textContent = `${task.text}（難易度：${task.difficulty}、属性：${task.attribute}）`;
 
-        const delbtn = document.createElement("button");
-        delbtn.textContent = "削除";
-        delbtn.addEventListener("click", () => {
-            list.removeChild(li);
-            tasks = tasks.filter(t => t.id !== task.id);
-            saveTasks();
-        });
+    const delbtn = document.createElement("button");
+    delbtn.textContent = "削除";
+    delbtn.addEventListener("click", () => {
+        list.removeChild(li);
+        tasks = tasks.filter(t => t.id !== task.id);
+        saveTasks();
+    });
 
-        li.appendChild(delbtn);
-        list.appendChild(li);
-    }
+    li.appendChild(delbtn);
+    list.appendChild(li);
+}
 

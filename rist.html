@@ -5,23 +5,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>リスト</title>
+    <style>
+        #tabs {
+            display: flex;
+            background: #00CCCC;
+            color: white;
+        }
+
+        #tabs button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: #00CCCC;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #tabs button.active {
+            background: #555;
+        }
+
+        .page {
+            display: none;
+            padding: 20px;
+        }
+
+        .page.active {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
-    <input id="todo-input" type="text" placeholder="やることを入力">
-    難易度: <select id="difficulty-select">
-        <option selected>易</option>
-        <option>普</option>
-        <option>難</option>
-    </select>
-    属性: <select id="attribute-select">
-        <option selected>生活</option>
-        <option>技能</option>
-        <option>仕事</option>
-    </select>
-    <button id="addbtn">追加</button>
-    <ul id="todo-list"></ul>
+    <div id="tabs">
+        <button id="tab-todo" class="active">ToDo</button>
+        <button id="tab-blank">Blank</button>
+    </div>
+    <div id="page-todo" class="page active">
+        <input id="todo-input" type="text" placeholder="やることを入力">
+        難易度: <select id="difficulty-select">
+            <option selected>易</option>
+            <option>普</option>
+            <option>難</option>
+        </select>
+        属性: <select id="attribute-select">
+            <option selected>生活</option>
+            <option>技能</option>
+            <option>仕事</option>
+        </select>
+        <button id="addbtn">追加</button>
+        <ul id="todo-list"></ul>
+    </div>
+
+    <div id="page-blank" class="page">
+        <h1>Blank Page</h1>
+    </div>
+
+    <script src="spa.js"></script>
     <script src="rist.js"></script>
+
 </body>
 
 </html>
