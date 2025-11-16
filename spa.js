@@ -19,3 +19,6 @@ function showPage(page) {
 }
 tabTodo.addEventListener('click', () => showPage('todo'));
 tabBlank.addEventListener('click', () => showPage('blank'));
+
+const tabs = document.querySelectorAll('.tab');
+const pages = document.querySelectorAll('.page');
