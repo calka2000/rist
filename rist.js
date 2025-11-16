@@ -53,11 +53,10 @@ function addTaskToList(task) {
         points += (task.difficulty === "易" ? 1 : task.difficulty === "普" ? 2 : 3);
         task.done = true;
         updateCharacter();
+        saveTasks();
         donebtn.remove();
         li.style.textDecoration = "line-through";
-        saveTasks();
     });
-    li.appendChild(donebtn);
 
     const delbtn = document.createElement("button");
     delbtn.textContent = "削除";
@@ -71,16 +70,13 @@ function addTaskToList(task) {
     li.appendChild(donebtn);
     list.appendChild(li);
 
-
-if (!task.done) {
-    li.appendChild(donebtn);
-} else {
-    li.style.textDecoration = "line-through";
-    donebtn.remove();
+     if (!task.done) {
+        li.appendChild(donebtn);
+    } else {
+        li.style.textDecoration = "line-through";
+        donebtn.remove();
+    }
 }
-list.appendChild(li);
-}
-
 
 function updateCharacter() {
     if (points < 20) {
