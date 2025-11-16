@@ -24,7 +24,8 @@ addBtn.addEventListener("click", () => {
         id: Date.now(),
         text: input.value.trim(),
         difficulty: difficultySelect.value,
-        attribute: attributeSelect.value
+        attribute: attributeSelect.value,
+        done: false
     };
     if (task.text === "") return;
     tasks.push(task);
@@ -50,11 +51,13 @@ function addTaskToList(task) {
     donebtn.textContent = "完了";
     donebtn.addEventListener("click", () => {
         points += (task.difficulty === "易" ? 1 : task.difficulty === "普" ? 2 : 3);
+        task.done = true;
         updateCharacter();
-        saveTasks();
         donebtn.remove();
         li.style.textDecoration = "line-through";
+        saveTasks();
     });
+    li.appendChild(donebtn);
 
     const delbtn = document.createElement("button");
     delbtn.textContent = "削除";
@@ -67,7 +70,17 @@ function addTaskToList(task) {
     li.appendChild(delbtn);
     li.appendChild(donebtn);
     list.appendChild(li);
+
+
+if (!task.done) {
+    li.appendChild(donebtn);
+} else {
+    li.style.textDecoration = "line-through";
+    donebtn.remove();
 }
+list.appendChild(li);
+}
+
 
 function updateCharacter() {
     if (points < 20) {
