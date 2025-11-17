@@ -79,19 +79,24 @@ function addTaskToList(task) {
 }
 
 function updateCharacter() {
-    if (points < 20) {
+    if (points < 10) {
         charImg.src = "1.gif";
-    } else if (points < 50) {
+    } else if (points < 30) {
         charImg.src = "2.gif";
-    } else if (points < 100) {
+    } else if (points < 50) {
         charImg.src = "3.gif";
-    } else {
+    } else if (points < 80) {
         charImg.src = "4.gif";
+    } else {
+        charImg.src = "5.gif";
     }
 }
 
 resetBtn.addEventListener("click", () => {
+    if (confirm("育成状況をリセットしますか？")) {
+    alert("育成状況ををリセットしました！");
     points = 0;
     saveTasks();
     updateCharacter();
+  }
 });
