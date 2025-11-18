@@ -4,7 +4,6 @@ const attributeSelect = document.getElementById("attribute-select");
 const addBtn = document.getElementById("addbtn");
 const list = document.getElementById("todo-list");
 const charImg = document.getElementById("character");
-const pointView = document.getElementById("point-view");
 const resetBtn = document.getElementById("reset-btn");
 
 let tasks = [];
