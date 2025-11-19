@@ -8,6 +8,10 @@ const resetBtn = document.getElementById("reset-btn");
 
 let tasks = [];
 let points = Number(localStorage.getItem("points")) || 0;
+let life = Number(localStorage.getItem("lifepoints")) || 0;
+let skill = Number(localStorage.getItem("skillpoints")) || 0;
+let work = Number(localStorage.getItem("workpoints")) || 0;
+
 updateCharacter();
 
 window.addEventListener("load", () => {
@@ -55,6 +59,12 @@ function addTaskToList(task) {
         saveTasks();
         donebtn.remove();
         li.style.textDecoration = "line-through";
+        if (task.attribute === "生活") life++;
+        if (task.attribute === "技能") skill++;
+        if (task.attribute === "仕事") work++;
+        localStorage.setItem("lifepoints", life);
+        localStorage.setItem("skillpoints", skill);
+        localStorage.setItem("workpoints", work);
     });
 
     const delbtn = document.createElement("button");
@@ -69,7 +79,7 @@ function addTaskToList(task) {
     li.appendChild(donebtn);
     list.appendChild(li);
 
-     if (!task.done) {
+    if (!task.done) {
         li.appendChild(donebtn);
     } else {
         li.style.textDecoration = "line-through";
@@ -78,24 +88,47 @@ function addTaskToList(task) {
 }
 
 function updateCharacter() {
-    if (points < 10) {
-        charImg.src = "1.gif";
-    } else if (points < 30) {
-        charImg.src = "2.gif";
-    } else if (points < 50) {
-        charImg.src = "3.gif";
-    } else if (points < 80) {
-        charImg.src = "4.gif";
-    } else {
-        charImg.src = "5.gif";
+    const maxAttr = Math.max(life, skill, work);
+    let dominant = "";
+    if (life === maxAttr) dominant = "life";
+    if (skill === maxAttr) dominant = "skill";
+    if (work === maxAttr) dominant = "work";
+
+    const evolveRules = [
+        {
+            range: [0, 9],
+            image: { life: "animation/1.gif", skill: "animation/1.gif", work: "animation/1.gif" }
+        },
+        {
+            range: [10, 29],
+            image: { life: "animation/2.gif", skill: "animation/2.gif", work: "animation/2.gif" }
+        },
+        {
+            range: [30, 49],
+            image: { life: "animation/3.gif", skill: "animation/3.gif", work: "animation/3.gif" }
+        },
+        {
+            range: [50, 69],
+            image: { life: "animation/4.gif", skill: "animation/4.gif", work: "animation/4.gif" }
+        },
+        {
+            range: [70, Infinity],
+            image: { life: "animation/5.gif", skill: "animation/6.gif", work: "animation/7.gif" }
+        }
+    ];
+    const rule = evolveRules.find(r =>
+        points >= r.range[0] && points <= r.range[1]);
+    if (rule) {
+        charImg.src = rule.image[dominant];
     }
 }
 
 resetBtn.addEventListener("click", () => {
     if (confirm("育成状況をリセットしますか？")) {
-    alert("育成状況ををリセットしました！");
-    points = 0;
-    saveTasks();
-    updateCharacter();
-  }
+        alert("育成状況ををリセットしました！");
+        points = life = skill = work = 0;
+        localStorage.clear();
+        saveTasks();
+        updateCharacter();
+    }
 });
