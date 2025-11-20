@@ -23,6 +23,11 @@ window.addEventListener("load", () => {
 });
 
 addBtn.addEventListener("click", () => {
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            addBtn.click();
+        }
+    });
     const task = {
         id: Date.now(),
         text: input.value.trim(),
