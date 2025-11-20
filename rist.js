@@ -5,6 +5,13 @@ const addBtn = document.getElementById("addbtn");
 const list = document.getElementById("todo-list");
 const charImg = document.getElementById("character");
 const resetBtn = document.getElementById("reset-btn");
+const messages = [
+    "よく頑張ったね！",
+    "休むことも大事だよ！",
+    "次は何をしようか？",
+    "君ならできるって信じてたよ！",
+    "一歩一歩進もう！"
+] 
 
 let tasks = [];
 let points = Number(localStorage.getItem("points")) || 0;
@@ -54,12 +61,12 @@ function addTaskToList(task) {
     const li = document.createElement("li");
     li.textContent = `${task.text}（難易度：${task.difficulty}、属性：${task.attribute}）`;
 
-
     const donebtn = document.createElement("button");
     donebtn.textContent = "完了";
     donebtn.addEventListener("click", () => {
         points += (task.difficulty === "易" ? 1 : task.difficulty === "普" ? 2 : 3);
         task.done = true;
+        alert(getRandomMessage());
         updateCharacter();
         saveTasks();
         donebtn.remove();
@@ -90,6 +97,11 @@ function addTaskToList(task) {
         li.style.textDecoration = "line-through";
         donebtn.remove();
     }
+}
+
+function getRandomMessage() {
+    const index = Math.floor(Math.random() * messages.length);
+    return messages[index];
 }
 
 function updateCharacter() {
