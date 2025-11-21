@@ -129,8 +129,12 @@ function updateCharacter() {
             image: { life: "animation/4.gif", skill: "animation/4.gif", work: "animation/4.gif" }
         },
         {
-            range: [70, Infinity],
+            range: [70, 99],
             image: { life: "animation/5.gif", skill: "animation/6.gif", work: "animation/7.gif" }
+        },
+        {
+            range: [100, Infinity],
+            image: { life: "animation/8.gif", skill: "animation/9.gif", work: "animation/10.gif" }
         }
     ];
     const rule = evolveRules.find(r =>
