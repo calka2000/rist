@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>リスト</title>
     <style>
+        body {
+            background-color: #EEFFFF;
+        }
+
         #tabs {
             display: flex;
             background: #00CCCC;
@@ -33,6 +37,47 @@
 
         .page.active {
             display: block;
+        }
+
+        #character-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        #balloon {
+            display: none;
+            position: absolute;
+            top: -20px;
+            left: 230%;
+            margin-left: 15px;
+
+            background-color: #fff;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-size: 14px;
+            width: 180px;
+            white-space: normal;
+            transform-origin: bottom left;
+        }
+
+        #balloon::after {
+            content: "";
+            position: absolute;
+            top: 40px;
+            left: -12px;
+            transform: translateY(-50%);
+            border: 8px solid transparent;
+            border-right-color: #b1b1b1;
+        }
+        .pop {
+            animation: pop 0.35s ease-out;
+        }
+
+        @keyframes pop {
+            0% {transform:scale(0.3);opacity: 0;}
+            60% {transform:scale(1.1);opacity: 1;}
+            100% {transform:scale(1);opacity: 1;}
         }
     </style>
 </head>
@@ -62,7 +107,15 @@
     <div id="page-blank" class="page">
         <h3>謎の生き物</h3>
         <h4>タスクをクリアして謎の生き物を育てよう！</h4>
-        <img id="character" src="animation/1.gif">
+        <div id="character-container">
+            <img id="character" src="animation/1.gif">
+            <div id="balloon">
+                <p id="balloon-text"></p>
+            </div>
+        </div>
+        <div>
+            <button id="talkbtn">話しかける</button>
+        </div>
         <div>
             <button id="reset-btn">リセット</button>
         </div>
@@ -70,7 +123,5 @@
 
     <script src="spa.js"></script>
     <script src="rist.js"></script>
-
 </body>
-
 </html>

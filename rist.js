@@ -11,7 +11,14 @@ const messages = [
     "次は何をしようか？",
     "君ならできるって信じてたよ！",
     "一歩一歩進もう！"
-] 
+]
+const talkmessage = [
+    "ぷにっ　ぷにっ",
+    "にょ～ん",
+    "きゅるるん！",
+    "もにゃもにゃ…",
+    "うにゃー！"
+];
 
 let tasks = [];
 let points = Number(localStorage.getItem("points")) || 0;
@@ -30,11 +37,6 @@ window.addEventListener("load", () => {
 });
 
 addBtn.addEventListener("click", () => {
-    input.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-            addBtn.click();
-        }
-    });
     const task = {
         id: Date.now(),
         text: input.value.trim(),
@@ -50,6 +52,10 @@ addBtn.addEventListener("click", () => {
     input.value = "";
     difficultySelect.value = "易";
     attributeSelect.value = "生活";
+});
+
+input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") addBtn.click();
 });
 
 function saveTasks() {
@@ -153,3 +159,21 @@ resetBtn.addEventListener("click", () => {
         updateCharacter();
     }
 });
+
+function showBalloon() {
+    const balloon = document.getElementById("balloon");
+    const balloonText = document.getElementById("balloon-text");
+    const talkMessage = talkmessage[Math.floor(Math.random() * talkmessage.length)];
+
+    balloonText.textContent = talkMessage;
+    balloon.style.display = "block";
+    balloon.classList.remove("pop");
+    void balloon.offsetWidth;
+    balloon.classList.add("pop");
+
+    setTimeout(() => {
+        balloon.style.display = "none";
+    }, 3000);
+}
+const talkbtn = document.getElementById("talkbtn");
+talkbtn.addEventListener("click", showBalloon);
