@@ -170,10 +170,6 @@ function showBalloon() {
     balloon.classList.remove("pop");
     void balloon.offsetWidth;
     balloon.classList.add("pop");
-
-    setTimeout(() => {
-        balloon.style.display = "none";
-    }, 3000);
 }
 const talkbtn = document.getElementById("talkbtn");
 talkbtn.addEventListener("click", showBalloon);
