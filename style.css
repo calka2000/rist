@@ -35,12 +35,13 @@ body {
 #character-container {
     position: relative;
     display: inline-block;
+    margin-bottom: 40px;
 }
 
 #balloon {
     display: none;
     position: absolute;
-    top: -20px;
+    top: -22px;
     left: 400%;
     background-color: #fffce6;
     border: 4px solid #554433;
@@ -110,12 +111,14 @@ body {
 }
 
 .command-box {
-    background:raga(0, 0, 0, 0.72);
+    background-color: #ffffbb;
     border: 4px solid #554433;
-    color: white;
-    padding: 15px;
-    border-radius: 10px;
-    width: 140px;
+    color: #fff;
+    padding: 12px 18px;
+    font-family: "MS Gothic",sans-serif;
+    width: fit-content;
+    border-radius: 16px;
+    box-shadow: 0 3px 0 #554433;
 }
 
 .command-box button {
