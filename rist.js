@@ -83,6 +83,8 @@ function addTaskToList(task) {
         localStorage.setItem("lifepoints", life);
         localStorage.setItem("skillpoints", skill);
         localStorage.setItem("workpoints", work);
+
+        checkAchievements();
     });
 
     const delbtn = document.createElement("button");
@@ -173,3 +175,52 @@ function showBalloon() {
 }
 const talkbtn = document.getElementById("talkbtn");
 talkbtn.addEventListener("click", showBalloon);
+
+let achievements = JSON.parse(localStorage.getItem("achievements")) || {
+    task10: false,
+    task30: false,
+    task100: false
+}
+
+const achievementNames = {
+    task10: "タスク10個達成！",
+    task30: "タスク30個達成！",
+    task100: "タスク100個達成！"
+}
+
+function checkAchievements() {
+    const totalTasks = points;
+
+    if (totalTasks >= 10 && !achievements.task10) unlockAchievement("task10");
+    if (totalTasks >= 30 && !achievements.task30) unlockAchievement("task30");
+    if (totalTasks >= 100 && !achievements.task100) unlockAchievement("task100");
+
+    localStorage.setItem("achievements", JSON.stringify(achievements));
+    renderAchievements();
+}
+
+function unlockAchievement(key) {
+    achievements[key] = true;
+    showAchievementPopup(achievementNames[key]);
+}
+
+function showAchievementPopup(text) {
+    const popup = document.createElement("div");
+    popup.className = "achivement-popup";
+    popup.textContent = "🏆 " + text;
+    document.body.appendChild(popup);
+    setTimeout(() => popup.remove(),3500);
+}
+
+function renderAchievements() {
+    const list = document.getElementById("achievement-list");
+    list.innerHTML = "";
+    Object.keys(achievements).forEach(key => {
+        const div =document.createElement("div");
+        div.className = "achievement-item " + (achievements[key] ? "unlocked" : "locked");
+        div.textContent =achievements[key] ?"🏆 " + achievementNames[key] : "???";
+        list.appendChild(div);
+    })
+}
+
+window.addEventListener("load", renderAchievements);
